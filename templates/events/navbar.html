@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home' %}">MyClub</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+ 
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+         <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'list_events' %}">Event</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'add_event' %}">AddEvent</a>
+          </li>                                       
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'add_venue' %}">AddVenue</a>
+          </li>        
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'list_venues' %}">Venues</a>
+          </li>    
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'venue_text' %}">Venue Text File</a>
+          </li> 
+
+          {% if user.is_authenticated %} 
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
+          </li>    
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'register' %}">Register</a>
+          </li>    
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a>
+          </li>                                                                                  
+          {% endif %}    
+                                                        
+        </ul>
+
+        <form class="d-flex" methood = "POST"  action = "{% url 'search_venues' %}">
+          {% csrf_token %}
+          <input class="form-control me-2" type="search" placeholder="Search Venue" aria-label="Search" name = "searched">
+          <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>

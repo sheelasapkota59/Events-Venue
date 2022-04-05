@@ -1,0 +1,36 @@
+{% extends 'events/base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+<center>
+    <h1> List Of Venues !!</h2>
+   <br/>
+    <table class="table table-striped table-hover table-bordered">
+        {% for venues in venue_list %}
+        <tr>
+            <td>
+              <a href = "{% url 'show_venues' venues.id %}"> {{ venues }} </a> 
+    
+        <td align = "right">
+            <a href = "{% url 'update_venues' venues.id %}" class = "btn btn-outline-primary" >Update </a>
+            <a href = "{% url 'delete_venues' venues.id %}" class = "btn btn-outline-danger" >Delete </a>
+        </td>
+    </tr> 
+   {%endfor%}
+    </center>
+</table>
+         
+{% else %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert"> 
+    <h1>Sorry! You Must Be Logged In To add in this  Page..</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="danger"></button>
+  </div>
+
+   <a href = "{% url 'login' %}">Login </a> or <a href = "{% url 'register' %}"> Register</a>
+  
+{% endif %}
+
+{% endblock%}
+
+
+
+
